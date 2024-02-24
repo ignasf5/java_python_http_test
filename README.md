@@ -1,11 +1,14 @@
 # Multithreading and Asynchronous API Calls with Kotlin Spring Boot
 
+The documentation is incomplete.
+
 ## Table of Contents
 - [Introduction](#introduction)
 - [Conclusion](#conclusion)
   - [Key Features](#key-features)
   - [How to Use](#how-to-use)
   - [Next Steps](#next-steps)
+  - [Results](#results)
 - [Documentation](#documentation)
   - [Technologies Used](#technologies-used)
   - [Setup Instructions](#setup-instructions)
@@ -35,6 +38,16 @@ For test part, we've developed a Python application with module of threading and
 - Explore further optimization techniques for multithreading and asynchronous processing.
 - Experiment with different configurations and APIs to test performance under various conditions.
 - Consider integrating additional monitoring and logging tools for more detailed analysis.
+
+### Results
+| Action              | Calls   | Threads | Time        |
+|---------------------|---------|---------|-------------|
+| Kotlin thread pool  | x1000   | x10     | 1584 ms     |
+| Kotlin Multithreading| x1000   |  -      | 462 ms      |
+| Python thread pool  | x1000   | x10     | 204.541 sec |
+| Python concurrent   | x1000   |  x10      |     20.466 seconds       |
+
+
 
 ## Documentation
 

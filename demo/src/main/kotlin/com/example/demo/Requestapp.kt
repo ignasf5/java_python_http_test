@@ -26,7 +26,10 @@ class ApiController(
     private val apiUrl: String,
 
     @Value("\${num.calls}")
-    private val numCalls: Int
+    private val numCalls: Int,
+
+    @Value("\${thread.pool}")
+    private val numThreads: Int
 ) {
 
     private val logger = LoggerFactory.getLogger(ApiController::class.java)
@@ -43,7 +46,7 @@ class ApiController(
 
         val restTemplate = RestTemplate()
 
-        val executor = Executors.newFixedThreadPool(10) // Number of threads
+        val executor = Executors.newFixedThreadPool(numThreads) // Number of threads
         val responses = mutableListOf<String>()
 
         // URLs to hit in the Flask API
