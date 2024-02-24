@@ -16,7 +16,7 @@ num_calls = config['num_calls_requestpy'] # Number of API calls per thread
 def make_request(url): # Function to make API requests
     start_time = time.time()
     response = requests.get(url)
-    duration = time.time() - start_time
+    duration = (time.time() - start_time) * 1000  # Change to milliseconds
     # print(f"Thread: {threading.current_thread().name}, URL: {url}, Duration: {duration:.3f} seconds")
 
 start_collection_time = time.time() # Start time of data collection
@@ -32,8 +32,9 @@ for i in range(num_threads):
 for thread in threads: # Wait for all threads to complete
     thread.join()
 
+
 end_collection_time = time.time() # End time of data collection
-total_duration = end_collection_time - start_collection_time
+total_duration = (end_collection_time - start_collection_time) * 1000
 print(f"Data collection ended at: {time.strftime('%Y-%m-%d %H:%M:%S')}")
-print(f"Total duration: {total_duration:.3f} seconds")
+print(f"Total duration: {total_duration:.3f} ms")
 print("All requests completed.")

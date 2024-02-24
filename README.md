@@ -40,14 +40,11 @@ For test part, we've developed a Python application with module of threading and
 - Consider integrating additional monitoring and logging tools for more detailed analysis.
 
 ### Results
-| Action              | Calls   | Threads | Time        |
-|---------------------|---------|---------|-------------|
-| Kotlin thread pool  | x1000   | x10     | 1584 ms     |
-| Kotlin Multithreading| x1000   |  -      | 462 ms      |
-| Python thread pool  | x1000   | x10     | 204.541 sec |
-| Python concurrent   | x1000   |  x10      |     20.466 seconds       |
-
-
+| Action              | Kotlin thread pool   | Kotlin Multithreading | Python thread pool        | Python concurrent |
+|---------------------|----------------------|-----------------------|---------------------------|-------------------|
+| Calls               | x1000                | x1000                 | x1000                     | x1000             |
+| Threads             | x10                  | -                     | x10                       | x10                 |
+| Time                | 1584 ms              | 462 ms                | 202555.592 ms               | 20467.969 ms      |
 
 ## Documentation
 

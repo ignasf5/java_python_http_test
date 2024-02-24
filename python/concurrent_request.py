@@ -24,7 +24,7 @@ def make_request(url):
     start_time = time.time()
     thread_num = threading.get_ident()  # Get the thread number
     response = requests.get(url)
-    duration = time.time() - start_time
+    duration = (time.time() - start_time) * 1000  # Change to milliseconds
     # print(f"Thread: {thread_num}, URL: {url}, Duration: {duration:.3f} seconds")
 
 # Start time of data collection
@@ -47,7 +47,7 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=num_threads) as executor:
 
 # End time of data collection
 end_collection_time = time.time()
-total_duration = end_collection_time - start_collection_time
+total_duration = (end_collection_time - start_collection_time) * 1000
 print(f"Data collection ended at: {time.strftime('%Y-%m-%d %H:%M:%S')}")
-print(f"Total duration: {total_duration:.3f} seconds")
+print(f"Total duration: {total_duration:.3f} ms") 
 print("All requests completed.")
