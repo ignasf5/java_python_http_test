@@ -1,6 +1,7 @@
 package com.example.demo
 
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 import org.springframework.web.bind.annotation.GetMapping
@@ -20,12 +21,18 @@ fun main(args: Array<String>) {
 }
 
 @RestController
-class ApiController {
+class ApiController(
+    @Value("\${api.url}")
+    private val apiUrl: String,
+
+    @Value("\${num.calls}")
+    private val numCalls: Int
+) {
 
     private val logger = LoggerFactory.getLogger(ApiController::class.java)
 
     // URL of the Flask API running locally
-    private val apiUrl = "http://localhost:5000"
+//    private val apiUrl = "http://localhost:5000"
 
     @GetMapping("/test-api")
     fun testApi(): String {
@@ -36,7 +43,7 @@ class ApiController {
 
         val restTemplate = RestTemplate()
 
-        val executor = Executors.newFixedThreadPool(5) // Number of threads
+        val executor = Executors.newFixedThreadPool(10) // Number of threads
         val responses = mutableListOf<String>()
 
         // URLs to hit in the Flask API
@@ -49,7 +56,7 @@ class ApiController {
         var count = AtomicInteger(0)
 
         // Loop to execute the request 1000 times
-        repeat(1000) {
+        repeat(numCalls) {
             // Increment count for each iteration
             val currentCount = count.incrementAndGet()
 

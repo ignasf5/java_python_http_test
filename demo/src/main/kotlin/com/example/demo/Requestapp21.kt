@@ -1,6 +1,7 @@
 package com.example.demo
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.runApplication
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
@@ -19,10 +20,16 @@ fun main(args: Array<String>) {
 }
 
 @RestController
-class ApiController21 {
+class ApiController21(
+    @Value("\${api.url}")
+    private val apiUrl: String,
+
+    @Value("\${num.calls}")
+    private val numCalls: Int
+) {
 
     // URL of the Flask API running locally
-    private val apiUrl = "http://localhost:5000"
+//    private val apiUrl = "http://localhost:5000"
 
     @GetMapping("/test-api21")
     fun testApi(): String {
@@ -43,7 +50,7 @@ class ApiController21 {
         val count = AtomicInteger(0)
 
         // Loop to execute the request 1000 times
-        repeat(1000) {
+        repeat(numCalls) {
             val currentCount = count.incrementAndGet()
 
             // Submit tasks for each URL
